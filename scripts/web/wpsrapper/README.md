@@ -11,4 +11,4 @@
 
 ## Setup
 
-`bash <(curl -s https://raw.githubusercontent.com/Vulnpire/Arsenal/refs/heads/main/scripts/web/wpsrapper/setup.sh)`
+`bash <(curl -s https://raw.githubusercontent.com/Vulnpire/Arsenal/refs/heads/c2/scripts/web/wpsrapper/setup.sh)`
