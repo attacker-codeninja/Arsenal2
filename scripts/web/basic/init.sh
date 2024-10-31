@@ -1,3 +1,4 @@
+# script.sh
 #!/bin/bash
 
 while true; do
@@ -7,7 +8,7 @@ while true; do
 
     PID=$!
 
-    sleep 1800
+    sleep 5
 
     kill $PID 2>/dev/null
 
