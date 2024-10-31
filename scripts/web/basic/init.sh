@@ -8,7 +8,7 @@ while true; do
 
     PID=$!
 
-    sleep 5
+    sleep 1800
 
     kill $PID 2>/dev/null
 
