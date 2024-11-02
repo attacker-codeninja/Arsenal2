@@ -1,0 +1,5 @@
+ext:pdf intext:"Confidential" <dates>
+ext:pdf intext:"IBAN" | intext:"BIC/SWIFT" | intext:"VAT Number" <dates>
+ext:pdf intext:"Internal use only" <dates>
+ext:pdf intext:"SSN" | intext:"Social Security" <dates>
+ext:pdf intext:"not for public release" | intext:"Not for Public Consumption or Distribution" <dates>
