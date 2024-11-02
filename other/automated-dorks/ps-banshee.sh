@@ -12,7 +12,7 @@ while IFS= read -r url; do
     dork_with_dates="${dork//<dates>/after:$start_date before:$end_date}"
     
     temp_file="temp_results.txt"
-    banshee -u "$url" -q "$dork_with_dates" -p 2 -d 4 > "$temp_file" # -a
+    banshee -u "$url" -q "$dork_with_dates" -p 3 -d 4 > "$temp_file" # -a
     
     if [ -s "$temp_file" ]; then
       echo "URL: $url | Dork used: $dork_with_dates" | anew "$output_file"
