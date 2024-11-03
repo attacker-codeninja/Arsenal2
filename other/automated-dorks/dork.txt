@@ -1,5 +1,9 @@
-ext:pdf intext:"Confidential" <dates>
-ext:pdf intext:"IBAN" | intext:"BIC/SWIFT" | intext:"VAT Number" <dates>
-ext:pdf intext:"Internal use only" <dates>
+ext:pdf intext:"Confidential" | intext:"Internal Use Only" <dates>
+ext:pdf intext:"IBAN" | intext:"SWIFT" | intext:"VAT Number" <dates>
 ext:pdf intext:"SSN" | intext:"Social Security" <dates>
 ext:pdf intext:"not for public release" | intext:"Not for Public Consumption or Distribution" <dates>
+ext:pdf intext:"Confidentiel" | intext:"Usage interne uniquement" <dates>
+ext:pdf intext:"Confidencial" | intext:"Uso interno" <dates>
+ext:pdf intext:"Geheim" | intext:"Nur für den internen Gebrauch" <dates>
+ext:pdf intext:"Riservato" | intext:"Solo uso interno" <dates>
+ext:pdf intext:"Confidencial" | intext:"Uso interno" <dates>
