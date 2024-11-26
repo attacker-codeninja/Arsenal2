@@ -8,7 +8,7 @@ fi
 input=$(cat)
 
 declare -A cms_patterns=(
-  ["wordpress"]="wordpress|wp|powered by wordpress"
+  ["wordpress"]="wordpress|wp|wp engine|powered by wordpress"
   ["jira"]="jira|confluence|atlassian|bitbucket|bamboo"
   ["drupal"]="drupal|drupal cms"
   ["joomla"]="joomla|joomla cms|joomla version"
@@ -22,6 +22,8 @@ declare -A cms_patterns=(
   ["static"]="jekyll|hugo|gatsby|netlify cms|pelican"
   ["government"]="govcms|openpublic|civicspace"
   ["enterprise"]="sitecore|kentico|episerver|dotcms|opentext|adobe experience manager|aem"
+  ["servers"]="iis|apache|nginx|tomcat|gunicorn|uwsgi|express|lighttpd|jetty"
+  ["titles"]="powered by|index of|welcome to|hosted by|proudly served by|dashboard"
 )
 
 for category in "${!cms_patterns[@]}"; do
