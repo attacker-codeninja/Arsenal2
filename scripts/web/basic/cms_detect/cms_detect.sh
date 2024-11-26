@@ -22,7 +22,7 @@ declare -A cms_patterns=(
   ["static"]="jekyll|hugo|gatsby|netlify cms|pelican"
   ["government"]="govcms|openpublic|civicspace"
   ["enterprise"]="sitecore|kentico|episerver|dotcms|opentext|adobe experience manager|aem"
-  ["servers"]="iis|apache|nginx|tomcat|gunicorn|uwsgi|express|lighttpd|jetty"
+  ["servers"]="iis|apache|nginx|tomcat|gunicorn|uwsgi|express|lighttpd|jetty|centos"
   ["titles"]="powered by|index of|welcome to|hosted by|proudly served by|dashboard"
 )
 
