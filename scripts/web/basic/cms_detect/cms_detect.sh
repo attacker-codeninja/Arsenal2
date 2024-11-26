@@ -27,5 +27,5 @@ declare -A cms_patterns=(
 )
 
 for category in "${!cms_patterns[@]}"; do
-  echo "$input" | grep -Ei "${cms_patterns[$category]}" | notify -id "$category" -bulk -d 2
+  echo "$input" | grep -Ei "${cms_patterns[$category]}" | notify -id "$category" -bulk -d 2 -silent
 done
