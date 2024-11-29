@@ -61,23 +61,24 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 run_subdomain_enumeration() {
-    axiom-scan "$FILE" -m subfinder -all -silent --rm-logs -anew sub.txt
+    axiom-scan "$FILE" -m subfinder -all -silent -recursive --rm-logs -anew sub.txt
     #axiom-scan "$FILE" -m subdominator -o subd.txt
     axiom-scan "$FILE" -m assetfinder -subs-only --rm-logs -anew sub.txt
     axiom-scan "$FILE" -m shosubgo -anew sub.txt --rm-logs
-    axiom-scan "$FILE" -m chaos -anew sub.txt && cat chaos.txt | sed 's/^\*\.//' | anew subs.txt && rm chaos.txt
+    axiom-scan "$FILE" -m chaos -anew chaos.txt && cat chaos.txt | sed 's/^\*\.//' | anew sub.txt && rm chaos.txt
     timeout --foreground 1800 axiom-scan "$FILE" -m findomain --external-subdomains -anew temp --rm-logs && cat temp | anew sub.txt
     cat sub.txt | sort -u > temp && mv temp sub.txt
-    axiom-scan "$FILE" -m asnrecon -anew sub.txt
+    # axiom-scan "$FILE" -m asnrecon -anew sub.txt
     grep -E "$(paste -sd '|' wildcards.txt)" sub.txt > temp && mv temp sub.txt
     run_probing
 }
 
 run_dns_mass() {
     axiom-scan "$FILE" -m subfinder -all -silent -recursive --rm-logs -anew sub.txt
-    axiom-scan sub.txt -m subfinder -all -silent -recursive --rm-logs -anew temp && cat temp | anew sub.txt && rm temp
+    #axiom-scan sub.txt -m subfinder -all -silent -recursive --rm-logs -anew temp && cat temp | anew sub.txt && rm temp
+    axiom-scan wildcards.txt -m puredns-bruteforce -anew sub.txt
     axiom-scan "$FILE" -m assetfinder -subs-only --rm-logs -anew sub.txt
-    axiom-scan "$FILE" -m chaos -anew chaos.txt && cat chaos.txt | sed 's/^\*\.//' | anew subs.txt && rm chaos.txt
+    axiom-scan "$FILE" -m chaos -anew chaos.txt && cat chaos.txt | sed 's/^\*\.//' | anew sub.txt && rm chaos.txt
     axiom-scan "$FILE" -m shosubgo -anew sub.txt --rm-logs
     timeout --foreground 1800 axiom-scan "$FILE" -m findomain --external-subdomains -anew temp && mv temp sub.txt
     axiom-scan "$FILE" -m asnrecon -anew sub.txt
@@ -87,9 +88,10 @@ run_dns_mass() {
 }
 
 run_probing() {
+    axiom-exec "curl -s https://raw.githubusercontent.com/trickest/resolvers/main/resolvers.txt | anew ~/lists/resolvers.txt"
     axiom-scan sub.txt -m dnsx -threads 300 -o dnsx.txt --rm-logs
-    axiom-scan dnsx.txt -m httpx -threads 300 -rl 175 -random-agent -title -td -probe -sc -ct -server -anew techs.txt --rm-logs
-    mv techs.txt subdomains/
+    axiom-scan dnsx.txt -m httpx -threads 300 -rl 175 -random-agent -title -td -probe -ports 80,443,3000,5000,7000,8001,8000,8090,9000,10000,10001,8080 -sc -ct -server -anew techs.txt --rm-logs
+    cat techs.txt | grep -vi failed | anew subdomains/techs.txt
     mv sub.txt subdomains/
 }
 
@@ -171,7 +173,7 @@ run_katana() {
                                       -e '/^$/d' | grep -Evi "png|jpg|gif|jpeg|swf|woff|svg|pdf|css|webp|woff|woff2|eot|ttf|otf|mp4|txt" | sort -u > cleaned_output.txt
     rm -rf plus/
     cat cleaned_output.txt | anew crawl/uri.txt && rm cleaned_output.txt
-    grep -E "$(paste -sd '|' wildcards.txt)" crawl/uri.txt > temp && mv temp crawl/uri.txt
+    # grep -E "$(paste -sd '|' wildcards.txt)" crawl/uri.txt > temp && mv temp crawl/uri.txt
     # cat crawl/uri.txt | grep -Ei "\.js$" > crawl/js.urls
     rm crawl.txt gau.txt hakrawler.txt
 }
